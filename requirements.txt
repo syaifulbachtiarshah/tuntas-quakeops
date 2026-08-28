@@ -1,0 +1,6 @@
+google-adk==2.7.1
+fastapi
+uvicorn[standard]
+pydantic>=2,<3
+pytest
+httpx
