@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import type { DashboardData, PlanDecision, TabId } from './domain';
 import { quakeOpsApi } from './services/quakeOpsApi';
 import { RotatingEarth } from './components/Earth';
+import { HistoricalEarthquakeMap } from './components/HistoricalEarthquakeMap';
 import { Metric, Panel, ProgressBar, SeverityBadge, StatusPill } from './components/Ui';
 
 const tabs: { id: TabId; label: string; short: string }[] = [
@@ -87,7 +88,7 @@ export default function App() {
       <div className="system-ribbon">
         <span><i className="live-dot" /> Multi-agent foundation online</span>
         <span>External dispatch <b>DISABLED</b></span>
-        <span>Data source <b>DEMO FIXTURES</b></span>
+        <span>Data source <b>DEMO + USGS CATALOG</b></span>
         <span className="ribbon-right">{data?.lastUpdated ?? 'Loading mission state…'}</span>
       </div>
 
@@ -189,9 +190,8 @@ function Overview({ data }: { data: DashboardData }) {
         <Metric label="Human approval" value="PENDING" detail="No external dispatch" tone="red" />
       </div>
       <div className="overview-grid">
-        <Panel title="ASEAN operational picture" eyebrow="ABSTRACT REGIONAL MAP" className="map-panel" action={<StatusPill>{data.dataAgeMinutes} min old</StatusPill>}>
-          <AbstractMap />
-          <div className="map-legend"><span><i className="marker id" /> Indonesia replay</span><span><i className="marker my" /> Malaysia replay</span><span><i className="radius" /> Probability envelope</span></div>
+        <Panel title="Nusantara earthquake watch" eyebrow="OBSERVED REGIONAL CATALOG" className="map-panel" action={<StatusPill tone="success">USGS CONNECTED</StatusPill>}>
+          <HistoricalEarthquakeMap compact />
         </Panel>
         <Panel title="Mission intelligence" eyebrow="LIVE DEMO STATE" className="intelligence-panel">
           <div className="earth-stage"><RotatingEarth /><div className="earth-copy"><span>REGIONAL WATCH</span><strong>ASEAN</strong><small>Historical replay · no live feed</small></div></div>
@@ -210,28 +210,6 @@ function Overview({ data }: { data: DashboardData }) {
   );
 }
 
-function AbstractMap() {
-  return (
-    <div className="map-canvas" role="img" aria-label="Abstract ASEAN operational map showing Malaysia and Indonesia replay areas">
-      <svg viewBox="0 0 720 330" aria-hidden="true">
-        <defs><pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#2d6670" strokeOpacity=".15" /></pattern></defs>
-        <rect width="720" height="330" fill="url(#grid)" />
-        <g className="map-land">
-          <path d="M164 54l48 8 38 24-9 34-47 13-38-19-17-32z" />
-          <path d="M251 147l91-22 86 10 65 24-21 29-101 3-81-17z" />
-          <path d="M333 210l78-8 91 19 69 42-32 22-83-20-104-4-54-27z" />
-          <path d="M512 101l49-14 31 18-9 33-51 22-24-20z" />
-          <path d="M591 170l35-4 23 37-11 62-27-12-13-45z" />
-        </g>
-        <g className="map-lines"><path d="M211 93C330 64 438 81 548 123" /><path d="M341 225C417 177 476 162 548 123" /></g>
-        <g className="event-point indonesia"><circle cx="391" cy="233" r="54" /><circle cx="391" cy="233" r="26" /><circle cx="391" cy="233" r="6" /><text x="406" y="230">CIANJUR</text><text x="406" y="248">INDONESIA · M5.6</text></g>
-        <g className="event-point malaysia"><circle cx="548" cy="123" r="42" /><circle cx="548" cy="123" r="20" /><circle cx="548" cy="123" r="6" /><text x="563" y="120">RANAU</text><text x="563" y="138">MALAYSIA · M6.0</text></g>
-      </svg>
-      <div className="map-coordinates">06° N — 07° S / 107° E — 117° E</div>
-    </div>
-  );
-}
-
 function EventCard({ event }: { event: DashboardData['events'][number] }) {
   return (
     <article className="event-card">
@@ -245,7 +223,10 @@ function EventCard({ event }: { event: DashboardData['events'][number] }) {
 function HistoricalReplay({ data }: { data: DashboardData }) {
   return (
     <>
-      <PageHeader eyebrow="FROZEN COMPARISON WORKSPACE" title="Historical event replay" description="Replay known sequences to exercise the agent workflow without presenting live operational data." right={<StatusPill tone="warning">DEMO FIXTURES</StatusPill>} />
+      <PageHeader eyebrow="CATALOG + FROZEN COMPARISON" title="Historical earthquake archive" description="Explore observed Indonesia–Malaysia earthquake history, then replay selected frozen scenarios through the agent workflow." right={<StatusPill tone="success">USGS CATALOG ACTIVE</StatusPill>} />
+      <Panel title="Indonesia–Malaysia earthquake map" eyebrow="HISTORICAL OBSERVATIONS" className="archive-map-panel">
+        <HistoricalEarthquakeMap />
+      </Panel>
       <div className="replay-layout">
         <Panel title="Synchronized replay clock" eyebrow="T+ 00:47:32" className="timeline-panel">
           <div className="replay-clock"><span>21 NOV 2022 · 13:21:10</span><strong>00:47:32</strong><small>Relative mission time</small></div>
@@ -290,7 +271,7 @@ function Forecast({ data }: { data: DashboardData }) {
             <li><span>Method</span><b>Historical sequence-pattern fixture</b></li>
             <li><span>Spatial scope</span><b>Regional replay envelope</b></li>
             <li><span>Freshness</span><b>{data.dataAgeMinutes} minutes · demo clock</b></li>
-            <li><span>Known gap</span><b>No live catalogue connection</b></li>
+            <li><span>Known gap</span><b>Catalog observations are not forecast calibration</b></li>
             <li><span>Confidence</span><b>Scenario-dependent; not calibrated for operations</b></li>
           </ul>
         </Panel>
@@ -378,7 +359,7 @@ function PlanSection({ number, title, items }: { number: string; title: string; 
 
 function Architecture() {
   const nodes = useMemo(() => [
-    { title: 'Historical fixtures', detail: 'Frozen event comparison', status: 'DEMO MOCK', tone: 'mock' },
+    { title: 'Catalog + fixtures', detail: 'USGS history and frozen replay', status: 'INTEGRATED', tone: 'foundation' },
     { title: 'FastAPI service', detail: 'Typed mission endpoints', status: 'FOUNDATION', tone: 'foundation' },
     { title: 'Google ADK workflow', detail: 'Mission orchestration', status: 'FOUNDATION', tone: 'foundation' },
     { title: 'Gemini reasoning', detail: 'Agent synthesis', status: 'FOUNDATION', tone: 'foundation' },
