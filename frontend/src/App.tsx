@@ -3,6 +3,7 @@ import type { DashboardData, PlanDecision, TabId } from './domain';
 import { quakeOpsApi } from './services/quakeOpsApi';
 import { RotatingEarth } from './components/Earth';
 import { HistoricalEarthquakeMap } from './components/HistoricalEarthquakeMap';
+import { TsunamiHistory } from './components/TsunamiHistory';
 import { Metric, Panel, ProgressBar, SeverityBadge, StatusPill } from './components/Ui';
 
 const tabs: { id: TabId; label: string; short: string }[] = [
@@ -14,6 +15,7 @@ const tabs: { id: TabId; label: string; short: string }[] = [
   { id: 'response', label: 'Response Plan', short: '06' },
   { id: 'architecture', label: 'Technical Architecture', short: '07' },
   { id: 'audit', label: 'Audit & Approval', short: '08' },
+  { id: 'tsunami', label: 'Tsunami & Sejarah', short: '09' },
 ];
 
 const decisionCopy: Record<PlanDecision, string> = {
@@ -24,7 +26,10 @@ const decisionCopy: Record<PlanDecision, string> = {
 };
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabId>('overview');
+  const [activeTab, setActiveTab] = useState<TabId>(() => {
+    const hash = window.location.hash.slice(1);
+    return tabs.find((tab) => tab.id === hash)?.id ?? 'overview';
+  });
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -45,6 +50,16 @@ export default function App() {
   };
 
   useEffect(() => { void loadDashboard(); }, []);
+  useEffect(() => {
+    const onHashChange = () => {
+      const tab = tabs.find((item) => item.id === window.location.hash.slice(1));
+      if (tab) setActiveTab(tab.id);
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+  useEffect(() => { window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${activeTab}`); }, [activeTab]);
+
 
   const recordDecision = async (decision: PlanDecision, note: string) => {
     if (!data || decisionBusy) return;
@@ -79,7 +94,7 @@ export default function App() {
           <div><p>ASEAN EMERGENCY COMMAND CENTRE</p><h1>TUNTAS <b>QuakeOps</b></h1></div>
         </div>
         <div className="topbar-status">
-          <StatusPill tone="warning">SIMULATED / HISTORICAL REPLAY</StatusPill>
+          <StatusPill tone="warning">{activeTab === 'tsunami' ? 'SEJARAH / SENARIO KAJIAN' : 'SIMULATED / HISTORICAL REPLAY'}</StatusPill>
           <div className="clock"><span>MISSION CLOCK</span><strong>02:42:16 MYT</strong></div>
           <div className="operator"><span>HC</span><div><b>Human Commander</b><small>Approval authority</small></div></div>
         </div>
@@ -88,7 +103,7 @@ export default function App() {
       <div className="system-ribbon">
         <span><i className="live-dot" /> Multi-agent foundation online</span>
         <span>External dispatch <b>DISABLED</b></span>
-        <span>Data source <b>DEMO + USGS CATALOG</b></span>
+        <span>Data source <b>{activeTab === 'tsunami' ? 'RUJUKAN BERSUMBER' : 'DEMO + USGS CATALOG'}</b></span>
         <span className="ribbon-right">{data?.lastUpdated ?? 'Loading mission state…'}</span>
       </div>
 
@@ -140,6 +155,7 @@ export default function App() {
               )}
               {activeTab === 'architecture' && <Architecture />}
               {activeTab === 'audit' && <Audit data={data} />}
+              {activeTab === 'tsunami' && <TsunamiHistory />}
             </div>
           )}
         </main>
