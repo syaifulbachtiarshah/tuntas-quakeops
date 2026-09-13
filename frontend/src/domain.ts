@@ -6,7 +6,8 @@ export type TabId =
   | 'agents'
   | 'response'
   | 'architecture'
-  | 'audit';
+  | 'audit'
+  | 'tsunami';
 
 export type Severity = 'low' | 'guarded' | 'elevated' | 'high' | 'critical';
 export type AgentState = 'monitoring' | 'analysing' | 'handoff' | 'ready';

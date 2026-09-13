@@ -1,0 +1,136 @@
+.tsunami-workspace { --ts-blue:#72ddff; --ts-purple:#c3a5ff; color:#e9f5f6; font-size:1rem; line-height:1.6; }
+.tsunami-workspace a { color:#91e9ee; text-decoration:underline; text-underline-offset:3px; overflow-wrap:anywhere; }
+.tsunami-workspace a:focus-visible, .tsunami-workspace summary:focus-visible { outline:2px solid #fff; outline-offset:4px; }
+.tsunami-workspace button { cursor:pointer; }
+.tsunami-heading { display:flex; justify-content:space-between; gap:20px; align-items:start; margin-bottom:18px; }
+.tsunami-kicker { margin:0 0 7px; color:#76ded5; font-size:.8125rem; font-weight:750; letter-spacing:.08em; }
+.tsunami-heading h2 { margin:0; font-size:clamp(1.6rem,2.6vw,2.25rem); line-height:1.2; letter-spacing:-.035em; max-width:770px; }
+.tsunami-heading p:not(.tsunami-kicker) { max-width:790px; color:#a7bbc2; margin:13px 0 0; }
+.tsunami-context-tag { padding:8px 10px; color:#d7c4ff; border:1px solid #51456e; background:#241e36; font-size:.75rem; font-weight:700; flex-shrink:0; }
+.tsunami-advisory { display:flex; flex-wrap:wrap; gap:4px 18px; padding:13px 16px; background:#132c34; border-left:3px solid #72ddff; margin-bottom:20px; font-size:.875rem; color:#c5dce3; }
+.tsunami-advisory strong { color:#f0f8fa; }
+.tsunami-coast-switch { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+.tsunami-coast-switch button { text-align:left; padding:17px 21px; border:1px solid #29434f; background:#0b1923; border-radius:7px; color:#ebf5f6; }
+.tsunami-coast-switch button.selected.west { border-color:var(--ts-blue); background:linear-gradient(110deg,#103541,#0b1923); box-shadow:inset 4px 0 var(--ts-blue); }
+.tsunami-coast-switch button.selected.east { border-color:var(--ts-purple); background:linear-gradient(110deg,#2b2541,#0b1923); box-shadow:inset 4px 0 var(--ts-purple); }
+.tsunami-coast-switch span,.tsunami-coast-switch strong,.tsunami-coast-switch small { display:block; }
+.tsunami-coast-switch span { font-size:.8125rem; letter-spacing:.08em; color:var(--ts-blue); }
+.tsunami-coast-switch .east span { color:var(--ts-purple); }
+.tsunami-coast-switch strong { font-size:1.125rem; margin:5px 0; }
+.tsunami-coast-switch small { color:#a9bec5; font-size:.875rem; }
+.tsunami-map-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(290px,1fr); gap:18px; align-items:start; }
+.tsunami-map-panel { min-width:0; border:1px solid #284551; border-radius:9px; overflow:hidden; background:#0a1720; }
+.tsunami-map-toolbar { padding:14px; display:flex; flex-direction:column; gap:13px; background:#0e212c; border-bottom:1px solid #284551; }
+.tsunami-segments { display:flex; gap:6px; flex-wrap:wrap; }
+.tsunami-segments button,.tsunami-place-buttons button { padding:9px 12px; background:#102833; color:#c0d9df; border:1px solid #345561; border-radius:5px; font-size:.875rem; }
+.tsunami-segments button[aria-pressed=true],.tsunami-place-buttons button[aria-pressed=true] { background:#b5fff0; color:#06362f; border-color:#b5fff0; font-weight:750; }
+.tsunami-layer-toggles { display:flex; flex-wrap:wrap; gap:8px 20px; font-size:.875rem; color:#b8d1d8; }
+.tsunami-layer-toggles label { display:flex; gap:8px; align-items:center; }
+.tsunami-layer-toggles input { width:17px; height:17px; accent-color:#18dcc9; }
+.tsunami-map-frame { background:#071d2b; }
+.tsunami-atlas { width:100%; height:520px; display:block; }
+.tsunami-land { fill:#213c44; stroke:#5b7478; stroke-width:1.2; stroke-linejoin:round; }
+.tsunami-land.malaysia { fill:#38625b; stroke:#a8d9be; stroke-width:1.5; }
+.tsunami-graticule line { stroke:#244553; stroke-width:1; stroke-dasharray:3 6; }
+.tsunami-graticule text { fill:#718e9b; font-size:16px; }
+.tsunami-country-labels { fill:#9bbcb7; font:600 19px system-ui,sans-serif; letter-spacing:2px; }
+.tsunami-sea-labels { fill:#82afbe; font:italic 19px Georgia,serif; }
+.tsunami-rupture-halo { fill:none; stroke:#ff6672; stroke-width:23; opacity:.1; }
+.tsunami-rupture { fill:none; stroke:#ff7380; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+.tsunami-epicentre { fill:#ff6475; stroke:#fff; stroke-width:2; }
+.tsunami-wave-paths polyline { fill:none; stroke:var(--ts-blue); stroke-width:3; stroke-linejoin:round; }
+.tsunami-manila,.tsunami-scenario-path { fill:none; stroke:var(--ts-purple); stroke-width:3; stroke-dasharray:9 7; stroke-linejoin:round; }
+.tsunami-label { fill:#f1f8f9; font:650 20px system-ui,sans-serif; paint-order:stroke; stroke:#071d2b; stroke-width:5px; stroke-linejoin:round; }
+.tsunami-label.sub { font-size:16px; fill:#acc4ce; font-weight:400; }
+.tsunami-label.west { fill:var(--ts-blue); }
+.tsunami-label.east { fill:var(--ts-purple); }
+.tsunami-north { fill:#edf6fa; font:600 18px system-ui,sans-serif; }
+.tsunami-map-legend { padding:12px 15px 0; display:flex; flex-wrap:wrap; gap:8px 16px; font-size:.8125rem; color:#c0d5dc; }
+.tsunami-map-legend span { display:flex; align-items:center; gap:7px; }
+.tsunami-map-legend i { width:18px; height:3px; display:inline-block; background:var(--ts-blue); }
+.tsunami-map-legend i.red { background:#ff7380; }
+.tsunami-map-legend i.violet { background:var(--ts-purple); }
+.tsunami-map-note,.tsunami-map-credit { margin:12px 15px; color:#a9bdc6; font-size:.8125rem; }
+.tsunami-place-buttons { display:flex; flex-wrap:wrap; gap:7px; padding:6px 15px; }
+.tsunami-place-detail { margin:10px 15px 16px; background:#122b36; padding:12px; font-size:.875rem; color:#c9e1e6; min-height:72px; }
+.tsunami-place-detail strong { display:block; color:#fff; }
+.tsunami-coast-detail { border-top:3px solid var(--ts-blue); background:#0d1c26; border-radius:7px; padding:24px; }
+.tsunami-coast-detail.east { border-color:var(--ts-purple); }
+.tsunami-coast-detail h3 { margin:8px 0 20px; font-size:1.5rem; line-height:1.3; letter-spacing:-.025em; }
+.tsunami-coast-detail p:not(.tsunami-kicker) { color:#bdd0d7; }
+.tsunami-coast-detail>a,.tsunami-insight>a,.tsunami-scenario-card>a { font-size:.875rem; }
+.tsunami-number { display:flex; gap:20px; align-items:center; margin:16px 0; }
+.tsunami-number strong { color:#fff; font-size:4.5rem; line-height:1; font-weight:600; letter-spacing:-.06em; }
+.tsunami-number span { color:#bdd3dc; font-size:.875rem; }
+.tsunami-casualties { margin:24px 0; }
+.tsunami-casualties div { display:flex; justify-content:space-between; gap:15px; padding:8px 0; border-bottom:1px solid #243d48; }
+.tsunami-casualties dd { margin:0; color:#fff; font-weight:700; }
+.tsunami-insight { padding-top:20px; margin-top:20px; border-top:1px solid #34505c; }
+.tsunami-insight p { margin:9px 0; }
+.tsunami-scenario-card { background:#282137; border:1px solid #64517d; padding:18px; margin-top:20px; border-radius:5px; }
+.tsunami-scenario-card span { color:#dfcaff; font-size:.8125rem; font-weight:750; }
+.tsunami-scenario-card h4 { font-size:1.125rem; margin:10px 0; line-height:1.4; }
+.tsunami-scenario-card p { font-size:.9375rem; }
+.tsunami-history-section,.tsunami-comparison-section { margin-top:30px; }
+.tsunami-section-heading { display:flex; gap:16px; justify-content:space-between; align-items:end; }
+.tsunami-section-heading h3,.tsunami-comparison-section h3 { margin:0; font-size:1.5rem; line-height:1.3; }
+.tsunami-section-heading>span { font-size:.8125rem; color:#a5bbc6; }
+.tsunami-timeline-buttons { display:grid; grid-template-columns:repeat(6,1fr); gap:9px; margin:18px 0 12px; }
+.tsunami-timeline-buttons button { border:1px solid #2b4654; background:#10232e; border-radius:5px; padding:12px; text-align:left; }
+.tsunami-timeline-buttons button[aria-pressed=true] { border-color:#72ddff; background:#174353; }
+.tsunami-timeline-buttons strong { display:block; font-size:1.4rem; color:#ebfaff; }
+.tsunami-timeline-buttons span { display:block; color:#a8c2cb; font-size:.8125rem; }
+.tsunami-history-card { display:grid; grid-template-columns:160px minmax(0,1fr); gap:25px; padding:23px; background:#0e202b; border:1px solid #2d4652; border-radius:7px; }
+.tsunami-history-card h4 { margin:0 0 9px; font-size:1.25rem; }
+.tsunami-history-card p { margin:9px 0; color:#c4d7dd; }
+.tsunami-event-type { display:inline-block; font-size:.8125rem; padding:4px 8px; background:#153f4a; color:#a1eafa; border:1px solid #336777; }
+.tsunami-event-type.study { background:#352a4a; color:#d6c0ff; border-color:#65517f; }
+.tsunami-history-card .tsunami-relevance { color:#9fe5d7; }
+.tsunami-inline-sources { display:flex; flex-wrap:wrap; gap:7px 20px; margin-top:16px; font-size:.875rem; }
+.tsunami-comparison-section>p:not(.tsunami-kicker) { color:#aec6ce; }
+.tsunami-table-scroll { overflow-x:auto; margin-top:16px; border:1px solid #2e4754; border-radius:7px; }
+.tsunami-workspace table { width:100%; border-collapse:collapse; min-width:680px; font-size:.9375rem; }
+.tsunami-workspace th,.tsunami-workspace td { padding:18px; text-align:left; border-bottom:1px solid #2b404a; vertical-align:top; }
+.tsunami-workspace thead th { background:#17313d; color:#e5f7fa; font-size:1rem; }
+.tsunami-workspace tbody th { width:23%; background:#0c1c25; font-weight:650; }
+.tsunami-workspace tbody td { width:38.5%; background:#0b1821; color:#bed2da; }
+.tsunami-workspace th small { display:block; margin-top:10px; font-size:.8125rem; font-weight:400; }
+.tsunami-preparedness { margin-top:25px; padding:24px; border:1px solid #2e675b; background:#102d2a; border-radius:7px; }
+.tsunami-preparedness h3 { font-size:1.4rem; margin:0; }
+.tsunami-preparedness p:not(.tsunami-kicker) { color:#c6ded8; }
+.tsunami-preparedness>div:last-child { display:flex; flex-wrap:wrap; gap:10px 25px; font-size:.875rem; }
+.tsunami-sources { margin-top:24px; background:#0d1b24; border:1px solid #2c4350; padding:18px 22px; border-radius:7px; }
+.tsunami-sources summary { font-size:1rem; cursor:pointer; font-weight:650; }
+.tsunami-sources p { color:#b8cdd5; }
+.tsunami-sources ul { padding-left:22px; }
+.tsunami-sources li { padding:8px 0; font-size:.9375rem; }
+.tsunami-sources li span { display:block; color:#9db6c0; font-size:.8125rem; }
+.tsunami-footer { margin:24px 0 5px; color:#9eb6c0; font-size:.8125rem; }
+.tsunami-local-nav { display:flex; flex-wrap:wrap; gap:10px 24px; margin:0 0 20px; font-size:.9375rem; }
+.tsunami-local-section { margin-top:32px; scroll-margin-top:24px; }
+.tsunami-local-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:18px; }
+.tsunami-local-card { min-width:0; background:#0e202b; border:1px solid #304c59; border-radius:8px; padding:24px; }
+.tsunami-local-card.model { border-color:#615075; background:#211d30; }
+.tsunami-local-card h4 { font-size:1.25rem; line-height:1.4; margin:15px 0 12px; }
+.tsunami-local-card h5 { font-size:1rem; margin:22px 0 8px; }
+.tsunami-local-card p,.tsunami-local-card li { color:#c3d5dc; }
+.tsunami-local-card li { margin:8px 0; }
+.tsunami-local-card ul { padding-left:22px; }
+.tsunami-local-card>a,.tsunami-local-citations { font-size:.875rem; }
+.tsunami-local-card .tsunami-local-limit { padding:12px 14px; background:#122e36; border-left:3px solid #7cd7d1; font-size:.9375rem; }
+.tsunami-model-values { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin:22px 0; }
+.tsunami-model-values dt { font-size:.875rem; color:#d4c4ea; }
+.tsunami-model-values dd { margin:5px 0 0; font-size:2.6rem; font-weight:700; line-height:1.2; color:#efe3ff; }
+.tsunami-action-grid,.tsunami-tremor-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:18px; }
+.tsunami-action-grid article { padding:20px; background:#12322d; border-top:3px solid #87d7bc; border-radius:5px; }
+.tsunami-action-grid span { font-size:.8125rem; color:#9cf0d2; font-weight:750; }
+.tsunami-action-grid h4 { margin:10px 0; font-size:1.1rem; }
+.tsunami-action-grid p { color:#c4ded4; margin-bottom:0; }
+.tsunami-local-citations { color:#abc3cd; }
+.tsunami-local-card .tsunami-local-date { font-size:1.2rem; font-weight:700; color:#92e8db; margin-bottom:0; }
+.tsunami-infographic { padding:16px 20px; margin-top:18px; border:1px solid #304c59; border-radius:7px; }
+.tsunami-infographic summary { cursor:pointer; font-weight:650; }
+.tsunami-infographic img { display:block; max-width:700px; width:100%; height:auto; margin:20px auto 0; }
+@media (max-width:900px) { .tsunami-local-grid,.tsunami-action-grid,.tsunami-tremor-grid { grid-template-columns:1fr; } }
+@media (max-width:1150px) { .tsunami-map-layout { grid-template-columns:minmax(0,1fr); }.tsunami-coast-detail { display:block; }.tsunami-heading { flex-direction:column; }.tsunami-atlas { height:560px; } }
+@media (max-width:650px) { .tsunami-coast-switch { gap:8px; }.tsunami-coast-switch button { padding:13px; }.tsunami-coast-switch strong { font-size:1rem; }.tsunami-coast-switch small { font-size:.8125rem; }.tsunami-atlas { height:auto; min-height:310px; }.tsunami-section-heading { display:block; }.tsunami-section-heading>span { display:block; margin-top:8px; }.tsunami-timeline-buttons { grid-template-columns:repeat(3,1fr); }.tsunami-history-card { grid-template-columns:1fr; gap:8px; padding:18px; }.tsunami-history-card>div:first-child { display:flex; gap:15px; align-items:center; }.tsunami-coast-detail { padding:20px; }.tsunami-context-tag { font-size:.75rem; }.tsunami-heading h2 { font-size:1.6rem; }.tsunami-map-note { font-size:.8125rem; } }
