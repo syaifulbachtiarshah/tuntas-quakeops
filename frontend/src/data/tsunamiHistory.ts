@@ -3,6 +3,10 @@ export type TsunamiView = 'compare' | '2004' | 'manila';
 export const tsunamiReviewed = '13 September 2026';
 
 export const tsunamiSources = {
+  kenyirStudy: { label: 'Nazaruddin & Duerrast (2021) · rekod gempa Kenyir', url: 'https://doi.org/10.1007/s42452-021-04686-2', kind: 'Kajian katalog dan analisis seismogram' },
+  kenyir2010: { label: 'Bernama / mStar · Kenyir, 10 Mac 2010', url: 'https://www.mstar.com.my/lokal/semasa/2010/03/11/gempa-bumi-di-kenyir-mungkin-berkait-kejadian-1980an', kind: 'Laporan wawancara pegawai JMM · 11 Mac 2010' },
+  kenyir2016: { label: 'Bernama · gegaran dirasai di sembilan kampung, 2016', url: 'https://www.malaysiakini.com/news/331459', kind: 'Laporan penduduk dan kenyataan TNB · 24 Februari 2016' },
+  psmza: { label: 'MQA · alamat rasmi PSMZA', url: 'https://www2.mqa.gov.my/mqr/iptaKPList.cfm?IDAkrIPTS=633', kind: 'Daftar institusi rasmi' },
   usgs2004: { label: 'USGS · gempa dan tsunami 2004/2005', url: 'https://www.usgs.gov/centers/pcmsc/science/tsunami-generation-2004-m91-sumatra-andaman-earthquake', kind: 'Agensi saintifik' },
   jps: { label: 'JPS · Malaysia’s Response to the December 2004 Tsunami', url: 'https://www.water.gov.my/jps/resources/auto%20download%20images/5844e2fa0dd1f.pdf', kind: 'Laporan pascabencana' },
   met: { label: 'METMalaysia · fakta dan keselamatan tsunami', url: 'https://www.met.gov.my/pendidikan/tsunami/', kind: 'Panduan rasmi' },
@@ -16,6 +20,12 @@ export const tsunamiSources = {
   geography: { label: 'Natural Earth · peta asas 1:110 juta', url: 'https://www.naturalearthdata.com/about/terms-of-use/', kind: 'Data geografi · public domain' },
 } as const;
 export type TsunamiSourceId = keyof typeof tsunamiSources;
+
+export const terengganuTremors: { date: string; title: string; evidence: string; text: string; limit: string; source: TsunamiSourceId }[] = [
+  { date: '1985–1987', title: 'Siri gempa kawasan Empangan Kenyir', evidence: 'Rekod dalam kajian', text: 'Kajian 2021 merangkum 27 gegaran dengan magnitud mb 2.5–4.6, dikaitkan dengan pengisian takungan Kenyir.', limit: 'Rekod kawasan Kenyir; tidak mengesahkan gegaran di Dungun atau PSMZA.', source: 'kenyirStudy' },
+  { date: '10 Mac 2010', title: 'Gempa lemah Kenyir', evidence: 'Kejadian direkodkan', text: 'Laporan Bernama memetik JMM tentang gempa magnitud 2.6, berpusat 22 km di barat Kuala Berang.', limit: 'Rekod gempa tidak dengan sendirinya mengesahkan seseorang merasai gegaran di sesuatu tempat.', source: 'kenyir2010' },
+  { date: '23 Februari 2016', title: 'Gegaran dirasai sekitar Kuala Berang', evidence: 'Ada laporan penduduk', text: 'Bernama melaporkan sembilan kampung merasai gegaran sekitar 9.25 malam, antaranya Jenagor, Pueh, Gaung, Kepah, Dusun, Batu Belah dan Kuala Ping.', limit: 'Laporan semasa menyebut magnitud 2.7; kajian 2021 melaporkan ML 2.5 (Mw 1.7). Nilai daripada sumber dan kaedah berbeza dikekalkan berasingan.', source: 'kenyir2016' },
+];
 
 export const coastComparison: { topic: string; west: string; east: string; source: TsunamiSourceId }[] = [
   { topic: 'Sumber yang perlu diperhatikan', west: 'Zon Sumatra–Andaman dan Lautan Hindi. Pendedahan berbeza mengikut bahagian pantai.', east: 'Manila Trench di Laut China Selatan ialah satu sumber yang dikaji untuk Terengganu.', source: 'eastStudy' },
@@ -44,5 +54,5 @@ export const tsunamiPlaces: { id: string; label: string; coordinates: number[]; 
   { id: 'penang', label: 'Pulau Pinang', coordinates: [100.24, 5.39], coast: 'west', note: 'JPS merekodkan 54 kematian di negeri Pulau Pinang pada 2004.' },
   { id: 'kualamuda', label: 'Kuala Muda', coordinates: [100.37, 5.58], coast: 'west', note: 'Komuniti pesisir dan muara sungai mengalami kerosakan tsunami 2004.' },
   { id: 'terengganu', label: 'Kuala Terengganu', coordinates: [103.14, 5.33], coast: 'east', note: 'Lokasi kajian senario Manila Trench; bukan penanda kejadian tsunami sebenar atau kawasan pemindahan.' },
-  { id: 'dungun', label: 'Dungun', coordinates: [103.42, 4.76], coast: 'east', note: 'Penanda orientasi di pantai Terengganu. Modul ini tidak menentukan risiko untuk sesuatu alamat.' },
+  { id: 'dungun', label: 'Dungun', coordinates: [103.42, 4.76], coast: 'east', note: 'Kajian 2023 merangkumi petak pesisir T8–T11. Lihat fokus Dungun & PSMZA di bawah untuk konteks hasil model dan batas penggunaannya.' },
 ];
